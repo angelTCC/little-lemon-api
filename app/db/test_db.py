@@ -1,5 +1,10 @@
-from session import engine
+from app.db.session import engine
 
+from app.db.session import SessionLocal
+from app.schemas.user import UserSchema
+from app.db.db_user import create_user
+
+# ==== TEST CONNECTION DATABASE ===
 
 # Test connection database
 try :
@@ -7,3 +12,21 @@ try :
     print("Database connection successful")
 except Exception as e:
     print("Database connection failed")
+
+# ==== TEST CREATE USER ====
+
+# create ORM session
+db = SessionLocal()
+
+# Create a new user schema for the request
+request = UserSchema(
+    name="Angel",
+    email="angel@gmail.com",
+    hashed_password="123"
+)
+
+new_user = create_user(db, request)
+
+print(new_user)
+
+
