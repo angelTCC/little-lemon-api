@@ -1,5 +1,7 @@
 from app.db.session import Base
 from sqlalchemy import Column, Integer, String
+from sqlalchemy.orm import relationship
+
 
 class UserModel(Base):
 
@@ -9,3 +11,5 @@ class UserModel(Base):
     name = Column(String)
     email = Column(String)
     hashed_password = Column(String)
+    
+    reservations = relationship("ReservationModel", back_populates="client")

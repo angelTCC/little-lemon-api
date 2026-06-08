@@ -1,0 +1,24 @@
+from sqlalchemy import Column, Enum, Integer, ForeignKey
+from app.db.session import Base
+from sqlalchemy.orm import relationship
+
+class ReservationModel(Base):
+
+    __tablename__ = "reservations"
+
+    id_reservation = Column(Integer, primary_key=True, index=True)
+    client_id = Column( Integer, ForeignKey("users.id_user"), nullable=False)
+    status = Column(
+        Enum( "pending", "confirmed", "cancelled", name="reservation_status" )
+    )
+
+    client = relationship("UserModel", back_populates="reservations")
+
+class ReservationItemModel(Base):
+
+    __tablename__ = "reservation_items"
+
+    id_item = Column(Integer, primary_key=True, index=True)
+    reservation_id = Column( Integer,ForeignKey("reservations.id_reservation") )
+    menu_id = Column( Integer, ForeignKey("menu.id_menu"))
+    quantity = Column(Integer)
