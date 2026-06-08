@@ -12,12 +12,13 @@ router = APIRouter()
 @router.post("/", response_model= UserResponseSchema)
 def create( request: UserSchema , db: Session = Depends(get_db)):
     return db_user.create_user( db, request)
-"""
-# Get User
-@router.get("/{user_id}")
-def get(user_id:int, db: Session = Depends(get_db)):
-    return "get user with id: " + str(user_id)
 
+# GET  =========================================================
+@router.get("/{user_id}", response_model=UserResponseSchema)
+def get(user_id:int, db: Session = Depends(get_db)):
+    return db_user.get_user(db, user_id)
+
+"""
 # Update User
 @router.put("/{user_id}")
 def update(user_id:int, db: Session = Depends(get_db)):

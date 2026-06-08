@@ -1,6 +1,6 @@
 from typing import List
 from pydantic import BaseModel, ConfigDict
-from app.schemas.reservation import ReservationItemResponseSchema
+from app.schemas.reservation import ReservationResponseSchema
 
 """
 Input and output are different, password is not returned in the response
@@ -16,6 +16,6 @@ class UserSchema(BaseModel):
 class UserResponseSchema(BaseModel):
     name: str
     email: str
-    items: List[ReservationItemResponseSchema] = []
+    reservations: List[ReservationResponseSchema] = []
 
     model_config = ConfigDict(from_attributes=True)

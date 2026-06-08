@@ -18,3 +18,7 @@ def create_user(db: Session, request: UserSchema):
     db.refresh(new_user)
 
     return new_user
+
+# ORM function to get a user from the database
+def get_user(db: Session, user_id: int):
+    return db.query(UserModel).filter(UserModel.id_user == user_id).first()

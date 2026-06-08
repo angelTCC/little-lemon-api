@@ -13,6 +13,7 @@ class ReservationModel(Base):
     )
 
     client = relationship("UserModel", back_populates="reservations")
+    items = relationship("ReservationItemModel", back_populates="reservation")
 
 class ReservationItemModel(Base):
 
@@ -22,3 +23,5 @@ class ReservationItemModel(Base):
     reservation_id = Column( Integer,ForeignKey("reservations.id_reservation") )
     menu_id = Column( Integer, ForeignKey("menu.id_menu"))
     quantity = Column(Integer)
+
+    reservation = relationship("ReservationModel", back_populates="items")
