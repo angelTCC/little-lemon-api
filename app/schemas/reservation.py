@@ -1,3 +1,4 @@
+from enum import Enum
 from pydantic import BaseModel, ConfigDict
 from typing import List
 
@@ -14,6 +15,7 @@ class ReservationItemSchema(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
 class ReservationItemResponseSchema(BaseModel):
+    id_item: int
     reservation_id: int
     menu_id: int
     quantity: int
@@ -23,13 +25,19 @@ class ReservationItemResponseSchema(BaseModel):
 
 # == SCHEMAS FOR RESERVATION ==
 
+class ReservationStatus(str, Enum):
+    pending = "pending"
+    confirmed = "confirmed"
+    cancelled = "cancelled"
+
 class ReservationSchema(BaseModel):
     client_id: int
-    status: str
+    status: ReservationStatus
 
 class ReservationResponseSchema(BaseModel):
     client_id: int
-    status: str
+    status: ReservationStatus
+    id_reservation: int
 
     items: List[ReservationItemResponseSchema] = []
 

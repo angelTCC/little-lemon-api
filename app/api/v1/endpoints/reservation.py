@@ -7,12 +7,12 @@ from sqlalchemy.orm import Session
 
 router = APIRouter()
 
-# Create Reservation
+# CREATE =======================================================
 @router.post("/", response_model=ReservationResponseSchema)
-def create_reservation(request: ReservationSchema, db: Session = Depends(get_db)):
+def create(request: ReservationSchema, db: Session = Depends(get_db)):
     return db_reservation.create_reservation(db, request)
 
 
 @router.get("/{reservation_id}", response_model=ReservationResponseSchema)
-def get_reservation(reservation_id: int, db: Session = Depends(get_db)):
+def get(reservation_id: int, db: Session = Depends(get_db)):
     return db_reservation.get_reservation(db, reservation_id)

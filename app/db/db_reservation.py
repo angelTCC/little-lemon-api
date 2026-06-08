@@ -3,11 +3,13 @@ from app.schemas.reservation import ReservationSchema
 from app.models.reservation import ReservationModel
 
 def create_reservation(db:Session, request: ReservationSchema):
+    
     new_reservation = ReservationModel(
         client_id = request.client_id,
         status = request.status
     )
 
+    # SQLAlchemy ORM no valida automaticamente antes de hacer los querys
     db.add(new_reservation)
     db.commit()
     db.refresh(new_reservation)
