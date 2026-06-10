@@ -20,7 +20,10 @@ class ReservationItemModel(Base):
     __tablename__ = "reservation_items"
 
     id_item = Column(Integer, primary_key=True, index=True)
-    reservation_id = Column( Integer,ForeignKey("reservations.id_reservation") )
+    reservation_id = Column(
+        Integer,
+        ForeignKey("reservations.id_reservation", ondelete="CASCADE")
+        )
     menu_id = Column( Integer, ForeignKey("menu.id_menu"))
     quantity = Column(Integer)
 

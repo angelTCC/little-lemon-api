@@ -19,3 +19,8 @@ class UserResponseSchema(BaseModel):
     reservations: List[ReservationResponseSchema] = []
 
     model_config = ConfigDict(from_attributes=True)
+
+class UserAuth(BaseModel):
+  id_user: int
+  name: str
+  email: str
