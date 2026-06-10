@@ -1,3 +1,5 @@
 .venv
 little_lemon.db
 .env
+__pycache__/
+*.pyc
