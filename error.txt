@@ -1,2 +1,0 @@
-    raise exc.NoReferencedTableError(
-sqlalchemy.exc.NoReferencedTableError: Foreign key associated with column 'reservation_items.menu_id' could not find table 'menu' with which to generate a foreign key to target column 'id_menu'

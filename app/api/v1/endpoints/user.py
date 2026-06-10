@@ -6,6 +6,8 @@ from app.models.user import UserModel
 from app.db.session import get_db
 from sqlalchemy.orm import Session
 
+from app.auth.oauth2 import oauth2_scheme
+
 router = APIRouter()
 
 # CREATE =======================================================
@@ -15,7 +17,7 @@ def create( request: UserSchema , db: Session = Depends(get_db)):
 
 # GET  =========================================================
 @router.get("/{user_id}", response_model=UserResponseSchema)
-def get(user_id:int, db: Session = Depends(get_db)):
+def get(user_id:int, db: Session = Depends(get_db), token : str = Depends(oauth2_scheme)):
     return db_user.get_user(db, user_id)
 
 """
